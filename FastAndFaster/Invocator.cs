@@ -124,13 +124,13 @@ namespace FastAndFaster
                 // Moreover, a static method cannot be abstract nor virtual.
                 // Because of that, we can emit OpCode "Call" instead of "Callvirt" 
                 IlHelper.LoadArguments(il, METHOD_LOAD_INDEX, parameterTypes);
-                IlHelper.ExecuteMethod(il, methodInfo, false);
+                IlHelper.ExecuteMethod(il, methodInfo);
             }
             else
             {
                 IlHelper.LoadTarget(il, type);
                 IlHelper.LoadArguments(il, METHOD_LOAD_INDEX, parameterTypes);
-                IlHelper.ExecuteMethod(il, methodInfo, true);
+                IlHelper.ExecuteMethod(il, methodInfo);
             }
         }
     }

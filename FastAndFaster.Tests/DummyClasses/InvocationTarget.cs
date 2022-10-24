@@ -83,4 +83,21 @@ namespace FastAndFaster.Tests.DummyClasses
 
         public override string VirtualFunc() => ChildVirtualFuncData;
     }
+
+    public abstract class InvocationAbstractTarget
+    {
+        public abstract void ActionMultipleParams(string text, int number);
+
+        public abstract string FuncMultipleParams(string text, int number);
+    }
+
+    public class InvocationConcreteTarget : InvocationAbstractTarget
+    {
+        public int ActionMultipleParamsCalled { get; set; } = -1;
+
+        public override void ActionMultipleParams(string text, int number) =>
+            ActionMultipleParamsCalled = text.Length + number;
+
+        public override string FuncMultipleParams(string text, int number) => $"{text}:{number}";
+    }
 }
