@@ -93,6 +93,14 @@ var genericInfo = new genericInfo
 
 For non-generic methods, `GenericInfo` can be omitted.
 
+## Benchmark results
+
+Below are some benchmark results for the reflection API, static C# code, and this library. The tests were run on a Dell Precision mobile work station.
+
+![](./images/readme_benchmark.png)
+
+We can see that in all cases, the performance of our library is much closer to static C# code than to the reflection API.
+
 ## Limitations
 
 By design, this library can only call public constructors and methods. This is because I believe there is a good reason when a method is set to private. And violating this encapsulation can do more harm than good.

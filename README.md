@@ -13,8 +13,8 @@ For more information about this library, see the [overview](doc/OVERVIEW.md).
   - [Call methods that return results](#call-methods-that-return-results)
 - [Call static methods](#call-static-methods)
 - [Call generic methods](#call-generic-methods)
-- [Benchmark results](#benchmark-results)
 - [Change cache settings](#change-cache-settings)
+- [Run the benchmark](#run-the-benchmark)
 - [License](#license)
 
 ## The example class
@@ -208,15 +208,32 @@ var invocCacheSettings = Invocator.SlidingExpirationInSecs; // The default value
 Invocator.SlidingExpirationInSecs = 600 // Delegates will now expire 10 minutes after their last use
 ```
 
-## Benchmark results
+## Run the benchmark
 
-This library comes with a benchmark project, which can be found [here](/FastAndFaster.Benchmark).
+This library comes with a benchmark project, which can be found [here](/FastAndFaster.Benchmark). Run the tests with the following command.
+```
+dotnet run --configuration Release
+```
 
-Below are some results for the reflection API, static C# code, and this library.
+You should then see the following list of tests.
+```
+Available Benchmarks:
+  #0 TestActionRunner
+  #1 TestCreatorRunner
+  #2 TestFuncRunner
+  #3 TestStaticActionRunner
+  #4 TestStaticFuncRunner
+```
 
-![](./doc/images/readme_benchmark.png)
+Then select the test you want to run by typing its name or number.
+```
+2
+```
 
-We can see that in all cases, the performance of our library is much closer to static C# code than to the reflection API.
+Or
+```
+TestFuncRunner
+```
 
 ## License
 

@@ -1,0 +1,21 @@
+name: Run unit tests
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET Core SDK 3.1
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '3.1.x'
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      - name: Run unit tests
+        run: dotnet test --no-restore --verbosity normal

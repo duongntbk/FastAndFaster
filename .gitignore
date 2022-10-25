@@ -1,6 +1,9 @@
 # Visual Studio and others
 .vs/**
 
+# Visual Studio for Mac
+.DS_Store
+
 # User-specific files
 *.suo
 *.user
