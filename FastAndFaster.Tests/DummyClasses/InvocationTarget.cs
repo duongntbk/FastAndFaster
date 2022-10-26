@@ -33,7 +33,10 @@ namespace FastAndFaster.Tests.DummyClasses
 
         public string ParameterlessFuncReturnRef()
         {
+            #pragma warning disable CS0219 // Make sure that the method is not optimized away
             var dummy = "dummy";
+            #pragma warning restore CS0219
+
             return ParameterlessFuncReturnRefData;
         }
 
