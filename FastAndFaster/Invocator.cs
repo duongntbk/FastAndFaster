@@ -117,21 +117,14 @@ namespace FastAndFaster
         {
             var il = dynInvoc.GetILGenerator();
 
-            if (methodInfo.IsStatic)
+            if (!methodInfo.IsStatic)
             {
-                // For a static method, there is no class instance to load to the stack.
-                // We can skip calling LoadTarget.
-                // Moreover, a static method cannot be abstract nor virtual.
-                // Because of that, we can emit OpCode "Call" instead of "Callvirt" 
-                IlHelper.LoadArguments(il, METHOD_LOAD_INDEX, parameterTypes);
-                IlHelper.ExecuteMethod(il, methodInfo, false);
-            }
-            else
-            {
+                // We only need to load the class instance to the stack if the method is non-static.
                 IlHelper.LoadTarget(il, type);
-                IlHelper.LoadArguments(il, METHOD_LOAD_INDEX, parameterTypes);
-                IlHelper.ExecuteMethod(il, methodInfo, true);
             }
+
+            IlHelper.LoadArguments(il, METHOD_LOAD_INDEX, parameterTypes);
+            IlHelper.ExecuteMethod(il, methodInfo);
         }
     }
 }

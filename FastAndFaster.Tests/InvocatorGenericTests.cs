@@ -55,6 +55,28 @@ namespace FastAndFaster.Tests
             target.ActionGenericArgumentsData.Should().Be(expectedRs);
         }
 
+        [Fact]
+        public void ShouldCallStaticGenericAction()
+        {
+            // Arrange
+            var typeName = typeof(InvocationGenericTarget).AssemblyQualifiedName;
+            var methodName = nameof(InvocationGenericTarget.ActionStaticGeneric);
+            var argumentTypes = new[] { typeof(string), typeof(bool) };
+            var arguments = new object[] { "JamesBond", false };
+            var genericInfo = new GenericInfo
+            {
+                GenericTypeIndex = new[] { 0, 1 },
+                GenericType = new[] { typeof(string), typeof(bool) }
+            };
+            var invocator = Invocator.CreateAction(typeName, methodName, argumentTypes, genericInfo);
+
+            // Action
+            invocator(null, arguments);
+
+            // Assert
+            InvocationGenericTarget.ActionStaticGenericData.Should().Be($"JamesBond_False");
+        }
+
         public static IEnumerable<object[]> ActionWrongGenericInfoData() =>
             new List<object[]>
             {
@@ -87,30 +109,18 @@ namespace FastAndFaster.Tests
                         GenericTypeIndex = new[] { 1 },
                         GenericType = new[] { typeof(double), typeof(byte), typeof(bool) }
                     }
+                },
+                // Wrong concrete type
+                new object[]
+                {
+                    new[] { typeof(bool), typeof(bool) },
+                    new GenericInfo
+                    {
+                        GenericTypeIndex = new[] { 1 },
+                        GenericType = new[] { typeof(bool), typeof(int) }
+                    }
                 }
             };
-
-        [Fact]
-        public void ShouldCallStaticGenericAction()
-        {
-            // Arrange
-            var typeName = typeof(InvocationGenericTarget).AssemblyQualifiedName;
-            var methodName = nameof(InvocationGenericTarget.ActionStaticGeneric);
-            var argumentTypes = new[] { typeof(string), typeof(bool) };
-            var arguments = new object[] { "JamesBond", false };
-            var genericInfo = new GenericInfo
-            {
-                GenericTypeIndex = new[] { 0, 1 },
-                GenericType = new[] { typeof(string), typeof(bool) }
-            };
-            var invocator = Invocator.CreateAction(typeName, methodName, argumentTypes, genericInfo);
-
-            // Action
-            invocator(null, arguments);
-
-            // Assert
-            InvocationGenericTarget.ActionStaticGenericData.Should().Be($"JamesBond_False");
-        }
 
         [Theory]
         [MemberData(nameof(ActionWrongGenericInfoData))]
@@ -228,7 +238,7 @@ namespace FastAndFaster.Tests
                 // Wrong generic type index
                 new object[]
                 {
-                    new[] {  typeof(int), typeof(string)  },
+                    new[] {  typeof(int), typeof(string) },
                     new GenericInfo
                     {
                         GenericTypeIndex = new[] { 0 },
@@ -255,6 +265,16 @@ namespace FastAndFaster.Tests
                         GenericType = new[] { typeof(string), typeof(bool), typeof(float) }
                     },
                 },
+                // Wrong concrete type
+                new object[]
+                {
+                    new[] { typeof(bool), typeof(string) },
+                    new GenericInfo
+                    {
+                        GenericTypeIndex = new[] { 1 },
+                        GenericType = new[] { typeof(string), typeof(bool) }
+                    }
+                }
             };
 
         [Theory]
@@ -263,7 +283,7 @@ namespace FastAndFaster.Tests
         {
             // Arrange
             var typeName = typeof(InvocationGenericTarget).AssemblyQualifiedName;
-            var methodName = nameof(InvocationGenericTarget.FuncReturnGeneric);
+            var methodName = nameof(InvocationGenericTarget.FuncGenericArguments);
 
             // Act
             Func<object> action = () => Invocator.CreateFunc(typeName, methodName, argumentTypes, genericInfo);

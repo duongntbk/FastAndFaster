@@ -37,9 +37,10 @@ namespace FastAndFaster.Helpers
             il.Emit(OpCodes.Ret);
         }
 
-        internal static void ExecuteMethod(ILGenerator il, MethodInfo methodInfo, bool isVirtual)
+        internal static void ExecuteMethod(ILGenerator il, MethodInfo methodInfo)
         {
-            var callOpCode = isVirtual ? OpCodes.Callvirt : OpCodes.Call;
+            var needVirtualCall = methodInfo.IsAbstract || methodInfo.IsVirtual;
+            var callOpCode = needVirtualCall ? OpCodes.Callvirt : OpCodes.Call;
             il.EmitCall(callOpCode, methodInfo, null);
 
             if (methodInfo.ReturnType != typeof(void) && methodInfo.ReturnType.IsValueType)
