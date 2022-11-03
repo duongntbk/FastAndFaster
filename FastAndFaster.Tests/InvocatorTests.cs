@@ -234,7 +234,7 @@ public class InvocatorTests
     }
 
     [Fact]
-    public void CallVirtualAction()
+    public void ShouldCallAction_Virtual()
     {
         // Arrange
         var target = new ChildInvocationTarget();
@@ -287,6 +287,44 @@ public class InvocatorTests
 
         // Act
         var rs = invocator(target, null);
+
+        // Assert
+        rs.Should().Be(expectedResult);
+    }
+
+    [Fact]
+    public void ShouldCallAction_Abstract()
+    {
+        // Arrange
+        var target = new InvocationConcreteTarget();
+        var typeName = typeof(InvocationAbstractTarget).AssemblyQualifiedName;
+        var methodName = nameof(InvocationAbstractTarget.ActionMultipleParams);
+        var parameterTypes = new[] { typeof(string), typeof(int) };
+        var invocator = Invocator.CreateAction(typeName, methodName, parameterTypes);
+        var arguments = new object[] { "Duong", 17 };
+        var expectedResult = 22;
+
+        // Act
+        invocator(target, arguments);
+
+        // Assert
+        target.ActionMultipleParamsCalled.Should().Be(expectedResult);
+    }
+
+    [Fact]
+    public void ShouldCallFunc_Abstract()
+    {
+        // Arrange
+        InvocationAbstractTarget target = new InvocationConcreteTarget();
+        var typeName = typeof(InvocationAbstractTarget).AssemblyQualifiedName;
+        var methodName = nameof(InvocationAbstractTarget.FuncMultipleParams);
+        var parameterTypes = new[] { typeof(string), typeof(int) };
+        var invocator = Invocator.CreateFunc(typeName, methodName, parameterTypes);
+        var arguments = new object[] { "Duong", 17 };
+        var expectedResult = "Duong:17";
+
+        // Act
+        var rs = invocator(target, arguments);
 
         // Assert
         rs.Should().Be(expectedResult);
