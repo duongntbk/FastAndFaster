@@ -6,6 +6,7 @@ For more information about this library, see the [overview](doc/OVERVIEW.md).
 
 ## Menu
 
+- [Installation](#installation)
 - [The example class](#the-example-class)
 - [Initialize objects of a class](#initialize-objects-of-a-class)
 - [Call instance methods](#call-instance-methods)
@@ -16,6 +17,13 @@ For more information about this library, see the [overview](doc/OVERVIEW.md).
 - [Change cache settings](#change-cache-settings)
 - [Run the benchmark](#run-the-benchmark)
 - [License](#license)
+
+## Installation
+
+This library is available as a Nuget package. Install it with the following command.
+```
+dotnet add package FastAndFaster
+```
 
 ## The example class
 

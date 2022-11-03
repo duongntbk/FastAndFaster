@@ -2,7 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <ReleaseVersion>1.0.0</ReleaseVersion>
+    <ReleaseVersion>1.1.0</ReleaseVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>FastAndFaster</PackageId>
+    <Version>1.1.0</Version>
+    <Authors>Nguyen Thai Duong,Medidata Solutions Worldwide</Authors>
+    <Description>A library to dynamically create objects and invoke their methods, using dynamic code generation.</Description>
+    <Copyright>Copyright(c) Nguyen Thai Duong 2022 / Medidata Solutions Worldwide 2022</Copyright>
+    <PackageTags>Reflection;Dynamic</PackageTags>
+    <PackageProjectUrl>https://github.com/duongntbk/FastAndFaster</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/duongntbk/FastAndFaster</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
