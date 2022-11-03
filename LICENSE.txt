@@ -1,5 +1,6 @@
 MIT License
 
+Copyright Nguyen Thai Duong 2022
 Copyright Medidata Solutions Worldwide 2022
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
