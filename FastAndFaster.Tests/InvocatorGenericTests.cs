@@ -1,12 +1,4 @@
-﻿using FastAndFaster.Helpers;
-using FastAndFaster.Tests.DummyClasses;
-using FluentAssertions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Xunit;
-
-namespace FastAndFaster.Tests
+﻿namespace FastAndFaster.Tests
 {
     public class InvocatorGenericTests
     {
